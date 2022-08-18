@@ -29,6 +29,9 @@ add_compile_definitions(__linux__)
 # sounds useful
 add_compile_definitions(ANDROID_WINDOWS_HOST)
 
+# required ig
+add_compile_definitions(_POSIX_TIMERS)
+
 # set this globally for now
 # then remove all other defines
 add_compile_definitions(_GNU_SOURCE)
@@ -45,6 +48,7 @@ add_compile_definitions(off64_t=off_t)
 add_compile_definitions(lseek64=lseek)
 add_compile_definitions(ftruncate64=ftruncate)
 add_compile_definitions(mmap64=mmap)
+add_compile_definitions(PATH_MAX=__PATH_MAX)
 
 include_directories(stub/include)
 
