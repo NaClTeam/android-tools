@@ -15,6 +15,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # don't seem to effect runtime behaviour simply disable the warnings.
 add_compile_options(-Wno-attributes)
 
+# silence syntax warns for CXX on Cygwin
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
+
 # libfsmgr (required by fastboot) requires a 64-bit off_t for lseek. On
 # 32-bit glibc platforms this is not the case by default.
 add_compile_definitions(_FILE_OFFSET_BITS=64)
