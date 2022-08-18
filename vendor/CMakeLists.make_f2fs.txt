@@ -43,4 +43,4 @@ add_executable(make_f2fs
 	f2fs-tools/mkfs/f2fs_format_main.c)
 
 target_link_libraries(make_f2fs
-	libf2fs_fmt_host libext2_uuid libsparse libbase z)
+	libf2fs_fmt_host libext2_uuid libsparse libbase z -static)

@@ -17,4 +17,4 @@ add_library(libbase STATIC
 
 target_include_directories(libbase PUBLIC
 	libbase/include core/include)
-target_link_libraries(libbase PUBLIC fmt::fmt liblog)
+target_link_libraries(libbase PUBLIC fmt::fmt liblog -static)

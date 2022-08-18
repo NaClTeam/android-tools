@@ -8,19 +8,19 @@ add_library(libsparse STATIC
 
 target_include_directories(libsparse PUBLIC
 	core/libsparse/include libbase/include)
-target_link_libraries(libsparse PRIVATE libbase)
+target_link_libraries(libsparse PRIVATE libbase -static)
 
 add_executable(simg2img
 	core/libsparse/simg2img.cpp)
 target_link_libraries(simg2img
-	libsparse z libbase)
+	libsparse z libbase -static)
 
 add_executable(img2simg
 	core/libsparse/img2simg.cpp)
 target_link_libraries(img2simg
-	libsparse z libbase)
+	libsparse z libbase -static)
 
 add_executable(append2simg
 	core/libsparse/append2simg.cpp)
 target_link_libraries(append2simg
-	libsparse z libbase)
+	libsparse z libbase -static)

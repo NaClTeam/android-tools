@@ -48,7 +48,7 @@ target_include_directories(libfsmgr PRIVATE
 	core/fs_mgr/liblp/include libbase/include
 	extras/ext4_utils/include core/libsparse/include
 	boringssl/include)
-target_link_libraries(libfsmgr PUBLIC fmt::fmt)
+target_link_libraries(libfsmgr PUBLIC fmt::fmt -static)
 
 target_compile_options(libfsmgr PRIVATE
         -U__linux__)

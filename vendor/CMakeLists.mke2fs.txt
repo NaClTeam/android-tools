@@ -116,7 +116,7 @@ add_executable("${ANDROID_MKE2FS_NAME}"
 	e2fsprogs/misc/util.c)
 
 target_link_libraries("${ANDROID_MKE2FS_NAME}"
-	libext2fs libsparse libbase libzip liblog libutil Threads::Threads z)
+	libext2fs libsparse libbase libzip liblog libutil Threads::Threads z -static)
 target_include_directories("${ANDROID_MKE2FS_NAME}" PRIVATE
 	e2fsprogs/lib)
 
@@ -137,7 +137,7 @@ if(HAVE_SYS_TYPES_H)
 endif(HAVE_SYS_TYPES_H)
 
 target_link_libraries(e2fsdroid
-	libext2fs libsparse libzip libcutils liblog libutil libbase libselinux libsepol z -lpcre2-8.dll pthread)
+	libext2fs libsparse libzip libcutils liblog libutil libbase libselinux libsepol z -lpcre2-8.dll pthread -static)
 target_include_directories(e2fsdroid PRIVATE
 	e2fsprogs/lib e2fsprogs/lib/ext2fs selinux/libselinux/include core/libcutils/include e2fsprogs/misc)
 
@@ -145,6 +145,6 @@ add_executable(ext2simg
 	e2fsprogs/contrib/android/ext2simg.c)
 
 target_link_libraries(ext2simg
-	libext2fs libsparse libbase libzip liblog libutil z pthread)
+	libext2fs libsparse libbase libzip liblog libutil z pthread -static)
 target_include_directories(ext2simg PRIVATE
 	e2fsprogs/lib core/libsparse/include)
