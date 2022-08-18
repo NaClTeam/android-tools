@@ -1,0 +1,26 @@
+From afa4d57cefe66d8fe9fb8591caf89f2621d4a826 Mon Sep 17 00:00:00 2001
+From: Ookiineko <chiisaineko@protonmail.com>
+Date: Fri, 19 Aug 2022 15:55:08 +0800
+Subject: [PATCH] import some changes from termux-packages
+
+Signed-off-by: Ookiineko <chiisaineko@protonmail.com>
+---
+ init/reboot.cpp             | 2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/init/reboot.cpp b/init/reboot.cpp
+index 99c467b..74f5f55 100644
+--- a/init/reboot.cpp
++++ b/init/reboot.cpp
+@@ -246,7 +246,7 @@ static bool FindPartitionsToUmount(std::vector<MountEntry>* block_dev_partitions
+         if (dump) {
+             LOG(INFO) << "mount entry " << mentry->mnt_fsname << ":" << mentry->mnt_dir << " opts "
+                       << mentry->mnt_opts << " type " << mentry->mnt_type;
+-        } else if (MountEntry::IsBlockDevice(*mentry) && hasmntopt(mentry, "rw")) {
++        } else if (MountEntry::IsBlockDevice(*mentry) && 0) {
+             std::string mount_dir(mentry->mnt_dir);
+             // These are R/O partitions changed to R/W after adb remount.
+             // Do not umount them as shutdown critical services may rely on them.
+-- 
+2.37.2
+

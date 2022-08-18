@@ -1,0 +1,26 @@
+From afa4d57cefe66d8fe9fb8591caf89f2621d4a826 Mon Sep 17 00:00:00 2001
+From: Ookiineko <chiisaineko@protonmail.com>
+Date: Fri, 19 Aug 2022 15:55:08 +0800
+Subject: [PATCH] import some changes from termux-packages
+
+Signed-off-by: Ookiineko <chiisaineko@protonmail.com>
+---
+ lib/libf2fs.c         | 2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/lib/libf2fs.c b/lib/libf2fs.c
+index 876c1dc..4297f4a 100644
+--- a/lib/libf2fs.c
++++ b/lib/libf2fs.c
+@@ -728,7 +728,7 @@ static int is_mounted(const char *mpt, const char *device)
+ 
+ 	while ((mnt = getmntent(file)) != NULL) {
+ 		if (!strcmp(device, mnt->mnt_fsname)) {
+-#ifdef MNTOPT_RO
++#if 0
+ 			if (hasmntopt(mnt, MNTOPT_RO))
+ 				c.ro = 1;
+ #endif
+-- 
+2.37.2
+

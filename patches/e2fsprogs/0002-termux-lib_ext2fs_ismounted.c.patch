@@ -1,0 +1,26 @@
+From afa4d57cefe66d8fe9fb8591caf89f2621d4a826 Mon Sep 17 00:00:00 2001
+From: Ookiineko <chiisaineko@protonmail.com>
+Date: Fri, 19 Aug 2022 15:55:08 +0800
+Subject: [PATCH] import some changes from termux-packages
+
+Signed-off-by: Ookiineko <chiisaineko@protonmail.com>
+---
+ lib/ext2fs/ismounted.c | 2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/lib/ext2fs/ismounted.c b/lib/ext2fs/ismounted.c
+index 46d330d..21b2032 100644
+--- a/lib/ext2fs/ismounted.c
++++ b/lib/ext2fs/ismounted.c
+@@ -181,7 +181,7 @@ static errcode_t check_mntent_file(const char *mtab_file, const char *file,
+ 	}
+ 	*mount_flags = EXT2_MF_MOUNTED;
+ 
+-#ifdef MNTOPT_RO
++#if 0
+ 	/* Check to see if the ro option is set */
+ 	if (hasmntopt(mnt, MNTOPT_RO))
+ 		*mount_flags |= EXT2_MF_READONLY;
+-- 
+2.37.2
+
