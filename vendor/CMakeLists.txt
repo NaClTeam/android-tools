@@ -22,6 +22,14 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
 # 32-bit glibc platforms this is not the case by default.
 add_compile_definitions(_FILE_OFFSET_BITS=64)
 
+#
+# aliases for Cygwin missing symbols
+#
+
+add_compile_definitions(off64_t=off_t)
+add_compile_definitions(lseek64=lseek)
+add_compile_definitions(ftruncate64=ftruncate)
+add_compile_definitions(mmap64=mmap)
 set(android-vendored
 	avb
 	adb
