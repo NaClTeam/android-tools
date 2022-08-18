@@ -40,7 +40,6 @@ add_library(libcutils STATIC
 	core/libcutils/trace-host.cpp
 	core/libcutils/threads.cpp)
 
-target_compile_definitions(libcutils PRIVATE -D_GNU_SOURCE)
 target_include_directories(libcutils PRIVATE
 	logging/liblog/include core/libutils/include)
 target_include_directories(libcutils PUBLIC

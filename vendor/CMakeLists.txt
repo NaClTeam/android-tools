@@ -29,6 +29,10 @@ add_compile_definitions(__linux__)
 # sounds useful
 add_compile_definitions(ANDROID_WINDOWS_HOST)
 
+# set this globally for now
+# then remove all other defines
+add_compile_definitions(_GNU_SOURCE)
+
 # libfsmgr (required by fastboot) requires a 64-bit off_t for lseek. On
 # 32-bit glibc platforms this is not the case by default.
 add_compile_definitions(_FILE_OFFSET_BITS=64)
