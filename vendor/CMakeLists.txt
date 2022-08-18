@@ -77,9 +77,7 @@ include(CMakeLists.mkbootimg.txt)
 install(TARGETS
 	"${ANDROID_MKE2FS_NAME}"
 	make_f2fs
-	adb
 	append2simg
-	fastboot
 	img2simg
 	lpadd
 	lpdump

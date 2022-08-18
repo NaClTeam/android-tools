@@ -6,8 +6,7 @@ utilities provided by [android-tools][android-tools].
 # Motivation
 
 [Many][void-linux] [Linux][arch-linux] [distributions][alpine-linux] have
-a package called android-tools which ships essential android command
-line tools like adb or fastboot. Sadly the upstream build system for
+a package called android-tools. Sadly the upstream build system for
 those tools is rather complex and doesn't allow building the command
 line tools only.
 
@@ -23,9 +22,7 @@ android command line utilities in a central place.
 
 Currently the following tools are supported:
 
-* adb
-* fastboot
-* mke2fs.android, make_f2fs (required by fastboot)
+* mke2fs.android, make_f2fs
 * simg2img, img2simg, append2simg
 * lpdump, lpmake, lpadd, lpflash, lpunpack
 * mkbootimg, unpack_bootimg, repack_bootimg
@@ -33,24 +30,16 @@ Currently the following tools are supported:
 The build system itself works quite well and is already being used for
 the Alpine Linux [android-tools package][alpine-linux] which I maintain.
 
-I personally don't use any android-tools except adb and fastboot. Thus
-my motivation to add support for additional tools is rather low at the
-moment. However, patches adding support for new tools in a clean way are
-welcome. Additionally, patches needed to make the software compile on
-other Linux distributions are welcome as well. Please create new patches
-using `git format-patch --no-numbered --no-signature …`.
-
 # Dependencies
 
 The following libraries are required by android-tools:
 
-1. [libusb][libusb]
-2. [PCRE][PCRE]
-3. [Google Test][gtest]
-4. [protobuf][protobuf]
-5. [brotli][brotli]
-6. [zstd][zstd]
-7. [lz4][lz4]
+1. [PCRE][PCRE]
+2. [Google Test][gtest]
+3. [protobuf][protobuf]
+4. [brotli][brotli]
+5. [zstd][zstd]
+6. [lz4][lz4]
 
 Python 3 is optionally needed as a run-time dependency in order to use
 the `mkbootimg`, `unpack_bootimg`, and `repack_bootimg` scripts which
@@ -102,7 +91,6 @@ have been copied from Anatol's ruby script.
 [arch-linux]: https://www.archlinux.org/packages/community/x86_64/android-tools/
 [alpine-linux]: https://pkgs.alpinelinux.org/package/edge/testing/x86_64/android-tools
 [release-page]: https://github.com/nmeum/android-tools/releases
-[libusb]: http://libusb.info/
 [PCRE]: http://pcre.sourceforge.net/
 [gtest]: https://github.com/google/googletest
 [gcc]: https://gcc.gnu.org/
