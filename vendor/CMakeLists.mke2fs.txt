@@ -106,6 +106,9 @@ add_library(libext2fs STATIC
 target_include_directories(libext2fs PRIVATE
 	e2fsprogs/lib e2fsprogs/lib/ext2fs core/libsparse/include)
 
+target_compile_options(libext2fs PRIVATE
+	-U__linux__)
+
 add_executable("${ANDROID_MKE2FS_NAME}"
 	e2fsprogs/misc/default_profile.c
 	e2fsprogs/misc/mke2fs.c

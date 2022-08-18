@@ -35,6 +35,9 @@ target_compile_definitions(libf2fs_fmt_host PUBLIC
 	-DF2FS_TOOLS_DATE="2020-08-24"
 	-DWITH_ANDROID)
 
+target_compile_options(libf2fs_fmt_host PRIVATE
+	-U__linux__)
+
 add_executable(make_f2fs
 	f2fs-tools/lib/libf2fs_io.c
 	f2fs-tools/mkfs/f2fs_format_main.c)

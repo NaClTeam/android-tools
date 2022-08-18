@@ -35,6 +35,9 @@ target_include_directories(libext4 PUBLIC
 	core/libsparse/include core/include selinux/libselinux/include
 	extras/ext4_utils/include libbase/include)
 
+target_compile_options(libext4 PRIVATE
+        -U__linux__)
+
 add_library(libfsmgr STATIC
 	core/fs_mgr/liblp/images.cpp
 	core/fs_mgr/liblp/partition_opener.cpp
@@ -46,6 +49,9 @@ target_include_directories(libfsmgr PRIVATE
 	extras/ext4_utils/include core/libsparse/include
 	boringssl/include)
 target_link_libraries(libfsmgr PUBLIC fmt::fmt)
+
+target_compile_options(libfsmgr PRIVATE
+        -U__linux__)
 
 add_library(libselinux STATIC
 	selinux/libselinux/src/booleans.c

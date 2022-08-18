@@ -1,0 +1,26 @@
+From ee2126201fae66991f087ab595e905affc54e420 Mon Sep 17 00:00:00 2001
+From: Ookiineko <chiisaineko@protonmail.com>
+Date: Thu, 18 Aug 2022 17:20:52 +0800
+Subject: [PATCH 11/17] unset __linux__
+
+Signed-off-by: Ookiineko <chiisaineko@protonmail.com>
+---
+ CMakeLists.txt | 2 ++
+ 1 files changed, 2 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index be89473..e5a5875 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -24,6 +24,8 @@ enable_language(CXX)
+ # run before all other targets.
+ add_custom_target(global_target)
+ 
++add_compile_options(-U__linux__)
++
+ if(ANDROID)
+   # Android-NDK CMake files reconfigure the path and so Go and Perl won't be
+   # found. However, ninja will still find them in $PATH if we just name them.
+-- 
+2.37.2
+

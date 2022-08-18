@@ -14,6 +14,9 @@ target_include_directories(liblp PRIVATE
 target_include_directories(liblp PUBLIC
 	core/fs_mgr/liblp/include)
 
+target_compile_options(liblp PRIVATE
+        -U__linux__)
+
 protobuf_generate_cpp(DYNAMIC_PARTITIONS_DEVICE_INFO_PROTO_SRCS DYNAMIC_PARTITIONS_DEVICE_INFO_PROTO_HDRS
 	extras/partition_tools/dynamic_partitions_device_info.proto)
 
