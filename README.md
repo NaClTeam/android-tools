@@ -1,22 +1,7 @@
-# android-tools
+# android-tools for Cygwin
 
 Git repository to make it easier to package certain command line
 utilities provided by [android-tools][android-tools].
-
-# Motivation
-
-[Many][void-linux] [Linux][arch-linux] [distributions][alpine-linux] have
-a package called android-tools. Sadly the upstream build system for
-those tools is rather complex and doesn't allow building the command
-line tools only.
-
-Linux Distribution therefore mostly ship their own build systems for
-building the command line utilities. This repository aims to make
-packaging of android command utilities easier by providing a simple
-CMake based build system and a ready-to-use tarball which doesn't
-require cloning all of the required git repositories manually. Besides
-this makes it easy to collect all patches required to build standalone
-android command line utilities in a central place.
 
 # Status
 
@@ -26,9 +11,6 @@ Currently the following tools are supported:
 * simg2img, img2simg, append2simg
 * lpdump, lpmake, lpadd, lpflash, lpunpack
 * mkbootimg, unpack_bootimg, repack_bootimg
-
-The build system itself works quite well and is already being used for
-the Alpine Linux [android-tools package][alpine-linux] which I maintain.
 
 # Dependencies
 
@@ -63,18 +45,28 @@ These tarballs should be used for packaging and general installation.
 After the tarball was downloaded and extracted android-tools can be
 build and installed as follows:
 
-	$ mkdir build && cd build
-	$ cmake ..
-	$ make
-	$ make install
+````shell
+$ cmake -B build -G Ninja \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_LEGACY_CYGWIN_WIN32=1
+$ cmake --build build
+$ cmake --install build
+````
 
 # Generating tarballs
 
 New source tarballs can be created from the Git repository using:
 
-	$ mkdir build && cd build
-	$ cmake ..
-	$ make package_source
+````shell
+$ cmake -B build -G Ninja \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_LEGACY_CYGWIN_WIN32=1
+$ ninja -C build package_source
+````
 
 Before a new release is uploaded a new `git-tag(1)` should be created
 for the release. Afterwards the tarball can be uploaded to the [GitHub
