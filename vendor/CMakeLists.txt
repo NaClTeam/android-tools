@@ -30,6 +30,9 @@ add_compile_definitions(off64_t=off_t)
 add_compile_definitions(lseek64=lseek)
 add_compile_definitions(ftruncate64=ftruncate)
 add_compile_definitions(mmap64=mmap)
+
+include_directories(stub/include)
+
 set(android-vendored
 	avb
 	adb
