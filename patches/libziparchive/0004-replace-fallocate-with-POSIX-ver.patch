@@ -1,0 +1,29 @@
+From 67c730219de16f63f83722890e0f9961d3ec514b Mon Sep 17 00:00:00 2001
+From: Ookiineko <chiisaineko@protonmail.com>
+Date: Thu, 18 Aug 2022 17:31:37 +0800
+Subject: [PATCH 16/17] replace fallocate() with POSIX ver
+
+- manpage says mode 0 means POSIX behavior but with
+  some optimizations, so its good to replace ig
+
+Signed-off-by: Ookiineko <chiisaineko@protonmail.com>
+---
+ zip_archive.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/zip_archive.cc b/zip_archive.cc
+index fe1baa1..c847cfc 100644
+--- a/zip_archive.cc
++++ b/zip_archive.cc
+@@ -1134,7 +1134,7 @@ class FileWriter : public zip_archive::Writer {
+       // EOPNOTSUPP error when issued in other filesystems.
+       // Hence, check for the return error code before concluding that the
+       // disk does not have enough space.
+-      long result = TEMP_FAILURE_RETRY(fallocate(fd, 0, current_offset, declared_length));
++      long result = TEMP_FAILURE_RETRY(posix_fallocate(fd, current_offset, declared_length));
+       if (result == -1 && errno == ENOSPC) {
+         ALOGW("Zip: unable to allocate %" PRIu64 " bytes at offset %" PRId64 ": %s",
+               declared_length, static_cast<int64_t>(current_offset), strerror(errno));
+-- 
+2.37.2
+

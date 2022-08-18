@@ -1,0 +1,67 @@
+From b261b7a271fec971bfd8bfe041ff557a9959dc42 Mon Sep 17 00:00:00 2001
+From: Ookiineko <chiisaineko@protonmail.com>
+Date: Thu, 18 Aug 2022 17:02:18 +0800
+Subject: [PATCH 08/17] fix libselinux build errs on Cygwin
+
+- we don't have a real mount()
+- we have pthread so pthread_once() is never NULL and
+  thus we will never need the manual implemetation.
+  also added an assert() to avoid undefined behaviors
+
+Signed-off-by: Ookiineko <chiisaineko@protonmail.com>
+---
+ libselinux/src/load_policy.c      | 4 ++--
+ libselinux/src/selinux_internal.h | 9 +++------
+ 2 files changed, 5 insertions(+), 8 deletions(-)
+
+diff --git a/libselinux/src/load_policy.c b/libselinux/src/load_policy.c
+index 9e75292..cefc35f 100644
+--- a/libselinux/src/load_policy.c
++++ b/libselinux/src/load_policy.c
+@@ -11,7 +11,7 @@
+ #include <string.h>
+ #include <errno.h>
+ #include "selinux_internal.h"
+-#ifndef ANDROID
++#if 0
+ #include <sepol/sepol.h>
+ #include <sepol/policydb.h>
+ #endif
+@@ -47,7 +47,7 @@ int security_load_policy(void *data, size_t len)
+ 
+ hidden_def(security_load_policy)
+ 
+-#ifndef ANDROID
++#if 0
+ #undef max
+ #define max(a, b) (((a) > (b)) ? (a) : (b))
+ 
+diff --git a/libselinux/src/selinux_internal.h b/libselinux/src/selinux_internal.h
+index 61b78aa..3e3022e 100644
+--- a/libselinux/src/selinux_internal.h
++++ b/libselinux/src/selinux_internal.h
+@@ -1,5 +1,6 @@
+ #include <selinux/selinux.h>
+ #include <pthread.h>
++#include <assert.h>
+ #include "dso.h"
+ 
+ hidden_proto(selinux_mkload_policy)
+@@ -121,12 +122,8 @@ extern int selinux_page_size hidden;
+ /* Call handler iff the first call.  */
+ #define __selinux_once(ONCE_CONTROL, INIT_FUNCTION)	\
+ 	do {						\
+-		if (pthread_once != NULL)		\
+-			pthread_once (&(ONCE_CONTROL), (INIT_FUNCTION));  \
+-		else if ((ONCE_CONTROL) == PTHREAD_ONCE_INIT) {		  \
+-			INIT_FUNCTION ();		\
+-			(ONCE_CONTROL) = 2;		\
+-		}					\
++		assert (pthread_once != NULL);		\
++		pthread_once (&(ONCE_CONTROL), (INIT_FUNCTION));  \
+ 	} while (0)
+ 
+ /* Pthread key macros */
+-- 
+2.37.2
+

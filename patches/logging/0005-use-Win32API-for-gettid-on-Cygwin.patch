@@ -1,0 +1,63 @@
+From 04ba0f1b636557ae4d7d8eb58b544b5c0bccd557 Mon Sep 17 00:00:00 2001
+From: Ookiineko <chiisaineko@protonmail.com>
+Date: Thu, 18 Aug 2022 17:27:08 +0800
+Subject: [PATCH 14/17] use Win32API for gettid() on Cygwin
+
+- we don't have pthread_threadid_np either,
+  and at least this is better than the
+  fallback getpid()
+
+Signed-off-by: Ookiineko <chiisaineko@protonmail.com>
+---
+ liblog/logger_write.cpp | 20 ++++++++++++--------
+ 1 files changed, 12 insertions(+), 8 deletions(-)
+
+diff --git a/liblog/logger_write.cpp b/liblog/logger_write.cpp
+index 08ab6e2..1189450 100644
+--- a/liblog/logger_write.cpp
++++ b/liblog/logger_write.cpp
+@@ -44,12 +44,14 @@
+ #include "pmsg_writer.h"
+ #endif
+ 
+-#if defined(__APPLE__)
++#if 0
+ #include <pthread.h>
+-#elif defined(__linux__) && !defined(__ANDROID__)
++#endif
++#if 1
+ #include <syscall.h>
+-#elif defined(_WIN32)
+-#include <windows.h>
++#endif
++#if 1
++#include <w32api/processthreadsapi.h>
+ #endif
+ 
+ using android::base::ErrnoRestorer;
+@@ -229,16 +231,18 @@ static int write_to_log(log_id_t, struct iovec*, size_t) {
+ 
+ // Copied from base/threads.cpp
+ static uint64_t GetThreadId() {
+-#if defined(__BIONIC__)
++#if 0
+   return gettid();
+-#elif defined(__APPLE__)
++#elif 0
+   uint64_t tid;
+   pthread_threadid_np(NULL, &tid);
+   return tid;
+-#elif defined(__linux__)
++#elif 0
+   return syscall(__NR_gettid);
+-#elif defined(_WIN32)
++#elif 1
+   return GetCurrentThreadId();
++#else
++#error No gettid() impl on this OS
+ #endif
+ }
+ 
+-- 
+2.37.2
+

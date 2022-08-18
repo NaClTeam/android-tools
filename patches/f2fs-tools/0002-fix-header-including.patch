@@ -1,0 +1,46 @@
+From 4b71520f7074fef9521abc898af5949ed1577981 Mon Sep 17 00:00:00 2001
+From: Ookiineko <chiisaineko@protonmail.com>
+Date: Thu, 18 Aug 2022 17:30:13 +0800
+Subject: [PATCH 15/17] fix header including
+
+- btw tho we've created some header stubs,
+  we will never create any with the "linux/"
+  prefix
+
+Signed-off-by: Ookiineko <chiisaineko@protonmail.com>
+---
+ include/f2fs_fs.h | 2 +-
+ lib/libf2fs.c     | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+index 45f7257..2af157d 100644
+--- a/include/f2fs_fs.h
++++ b/include/f2fs_fs.h
+@@ -39,7 +39,7 @@
+ #endif
+ 
+ #include <inttypes.h>
+-#ifdef HAVE_LINUX_TYPES_H
++#if 0
+ #include <linux/types.h>
+ #endif
+ #include <sys/types.h>
+diff --git a/lib/libf2fs.c b/lib/libf2fs.c
+index 4297f4a..22c2c3d 100644
+--- a/lib/libf2fs.c
++++ b/lib/libf2fs.c
+@@ -40,8 +40,8 @@
+ #ifdef HAVE_LINUX_HDREG_H
+ #include <linux/hdreg.h>
+ #endif
+-#ifdef HAVE_LINUX_LIMITS_H
+-#include <linux/limits.h>
++#if 1
++#include <limits.h>
+ #endif
+ 
+ #ifndef WITH_ANDROID
+-- 
+2.37.2
+

@@ -1,0 +1,25 @@
+From 0565f3cb28e6e07692571af5a10e46f2dfe1a1ad Mon Sep 17 00:00:00 2001
+From: Ookiineko <chiisaineko@protonmail.com>
+Date: Thu, 18 Aug 2022 17:40:38 +0800
+Subject: [PATCH 02/17] CMakeLists: silence find_program() warns
+
+Signed-off-by: Ookiineko <chiisaineko@protonmail.com>
+---
+ CMakeLists.txt | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 455266f..2447837 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,4 +1,7 @@
+ cmake_minimum_required(VERSION 3.3)
++if(POLICY CMP0109)
++  cmake_policy(SET CMP0109 OLD)
++endif()
+ 
+ # Defer enabling C and CXX languages.
+ project(BoringSSL NONE)
+-- 
+2.37.2
+
