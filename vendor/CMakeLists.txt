@@ -100,6 +100,8 @@ find_package(Threads REQUIRED)
 
 include_directories(${PROTOBUF_INCLUDE_DIRS})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
+include_directories(/usr/include/linux_compat/include)
+
 
 include(CMakeLists.libbase.txt)
 include(CMakeLists.libandroidfw.txt)
