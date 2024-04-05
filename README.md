@@ -1,3 +1,5 @@
+# DEPRECATION NOTICE: DEVELOPMENT MOVED TO https://github.com/ookiineko/android-image-tools
+
 # android-tools for Cygwin
 
 Git repository to make it easier to package certain command line
